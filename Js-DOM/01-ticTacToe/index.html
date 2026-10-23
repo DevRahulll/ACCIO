@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Tic Tac Toe</title>
+    </head>
+    <body>
+        <main class="container">
+            <section id="player-form">
+                <h1>Tic Tac Toe</h1>
+
+                <form id="submit">
+                    <label for="player-1">Player 1 Name (X)</label>
+                    <input
+                        type="text"
+                        id="player-1"
+                        placeholder="Enter player 1 Name"
+                        required
+                    />
+                    <label for="player-2">Player 2 Name (O)</label>
+                    <input
+                        type="text"
+                        id="player-2"
+                        placeholder="Enter player 2 Name"
+                        required
+                    />
+                    <button type="submit">Start Game</button>
+                </form>
+            </section>
+
+            <section id="game" hidden>
+                <h1>Tic Tac Toe</h1>
+                <div class="message"></div>
+
+                <div class="board" role="group" aria-label="Tic Toe board">
+                    <button type="button" class="cell" id="1"></button>
+                    <button type="button" class="cell" id="2"></button>
+                    <button type="button" class="cell" id="3"></button>
+                    <button type="button" class="cell" id="4"></button>
+                    <button type="button" class="cell" id="5"></button>
+                    <button type="button" class="cell" id="6"></button>
+                    <button type="button" class="cell" id="7"></button>
+                    <button type="button" class="cell" id="8"></button>
+                    <button type="button" class="cell" id="9"></button>
+                </div>
+
+                <button id="restart" type="button">Play Again</button>
+            </section>
+        </main>
+        <script src="./script.js"></script>
+    </body>
+</html>
