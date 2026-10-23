@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <script src="./script.js" defer></script>
+        <title>Employee Management System</title>
+    </head>
+    <body>
+        <div id="container">
+            <h2>New Employees</h2>
+            <form id="submit" novalidate>
+                <div class="box">
+                    <label for="name">Enter Name</label>
+                    <input type="text" name="name" id="name" required />
+                </div>
+                <div class="box">
+                    <label for="profession">Enter Profession</label>
+                    <input
+                        type="text"
+                        name="profession"
+                        id="profession"
+                        required
+                    />
+                </div>
+                <div class="box">
+                    <label for="age">Enter Age</label>
+                    <input type="number" name="age" id="age" required />
+                </div>
+            </form>
+            <button type="submit" id="btn">Add User</button>
+            <p class="message"></p>
+            <div id="content">
+                <h3>Added Employees</h3>
+                <div id="employee-list"></div>
+            </div>
+        </div>
+    </body>
+</html>
