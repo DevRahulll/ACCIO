@@ -1263,3 +1263,133 @@ let student_Data = [
         city: "Makin Village",
     },
 ];
+
+const tableBody = document.getElementById("table-body");
+const searchInput = document.getElementById("search-input");
+const searchBtn = document.getElementById("search-btn");
+
+// currentList ==> what is shown right now (after search). sorting works on it
+let currrentList = [...student_Data];
+
+function renderTable(list) {
+    tableBody.innerHTML = "";
+
+    if (list.length === 0) {
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+
+        cell.colSpan = 7;
+        cell.className = "empty";
+        cell.textContent = "No students found";
+        row.append(cell);
+        tableBody.append(row);
+        return;
+    }
+
+    list.forEach(function (student) {
+        const row = document.createElement("tr");
+
+        const idCell = document.createElement("td");
+        idCell.textContent = student.id;
+
+        //name cell: avtar + full name
+        const nameCell = document.createElement("td");
+        const nameBox = document.createElement("div");
+        nameBox.className = "name-cell";
+        const img = document.createElement("img");
+        img.src = student.img_src;
+        img.alt = student.first_name;
+        const nameText = `${student.first_name} ${student.last_name}`;
+        nameBox.append(img, nameText);
+        nameCell.append(nameBox);
+
+        const genderCell = document.createElement("td");
+        genderCell.textContent = student.gender;
+
+        const classCell = document.createElement("td");
+        classCell.textContent = student.class;
+
+        const marksCell = document.createElement("td");
+        marksCell.textContent = student.marks;
+
+        const passingCell = document.createElement("td");
+        passingCell.textContent = student.passing ? "Passing" : "Failed";
+
+        const emailCell = document.createElement("td");
+        emailCell.textContent = student.email;
+
+        row.append(
+            idCell,
+            nameCell,
+            genderCell,
+            classCell,
+            marksCell,
+            passingCell,
+            emailCell,
+        );
+
+        tableBody.append(row);
+    });
+}
+
+function fullname(student) {
+    return `${student.first_name} ${student.last_name}`.toLowerCase();
+}
+
+// Searching
+function searchStudents() {
+    const query = searchInput.value.trim().toLowerCase();
+
+    currrentList = student_Data.filter(function (student) {
+        return (
+            fullname(student).includes(query) ||
+            student.email.toLowerCase().includes(query) ||
+            student.gender.toLowerCase().includes(query)
+        );
+    });
+
+    renderTable(currrentList);
+
+    searchInput.value = "";
+}
+
+searchBtn.addEventListener("click", searchStudents);
+searchBtn.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") searchStudents();
+});
+
+//sorting
+document.getElementById("sort-az").addEventListener("click", () => {
+    currrentList.sort((a, b) => fullname(a).localeCompare(fullname(b)));
+    renderTable(currrentList);
+});
+document.getElementById("sort-za").addEventListener("click", () => {
+    currrentList.sort((a, b) => fullname(b).localeCompare(fullname(a)));
+    renderTable(currrentList);
+});
+
+//sorting act marks
+document.getElementById("sort-marks").addEventListener("click", () => {
+    currrentList.sort((a, b) => b.marks - a.marks);
+    renderTable(currrentList);
+});
+
+//pass
+document.getElementById("sort-passing").addEventListener("click", () => {
+    currrentList.sort((a, b) => Number(b.passing) - Number(a.passing));
+    renderTable(currrentList);
+});
+
+// class
+document.getElementById("sort-class").addEventListener("click", () => {
+    currrentList.sort((a, b) => a.class - b.class);
+    renderTable(currrentList);
+});
+
+// gender A-> Z
+document.getElementById("sort-gender").addEventListener("click", () => {
+    currrentList.sort((a, b) => a.gender.localeCompare(b.gender));
+    renderTable(currrentList);
+});
+
+renderTable(currrentList);
