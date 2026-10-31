@@ -17,6 +17,7 @@ export const register = async (req, res) => {
         }
 
         const user = await UserSchema.create({ name, email, password });
+
         const userObj = user.toObject();
         delete userObj.password;
 
@@ -60,13 +61,14 @@ export const login = async (req, res) => {
         delete userObj.password;
 
         // return cookies
-        res.setCookie("cookie", token, {
-            maxAge: 12 * 60 * 60 * 1000,
-            httpOnly: true,
-        });
+        // res.setCookie("cookie", token, {
+        //     maxAge: 12 * 60 * 60 * 1000,
+        //     httpOnly: true,
+        // });
 
         return res.status(201).json({
-            message: "User created successfully",
+            message: "User Logged In successfully",
+            token,
             data: userObj,
         });
     } catch (error) {
@@ -80,7 +82,10 @@ export const login = async (req, res) => {
 
 export const profile = async (req, res) => {
     try {
-        const { id } = req.headers;
+        return res.status(200).json({
+            message: "user profile : ",
+            data: req.user,
+        });
     } catch (error) {
         console.log("Internal Server error", error.message);
         return res.status(401).json({
