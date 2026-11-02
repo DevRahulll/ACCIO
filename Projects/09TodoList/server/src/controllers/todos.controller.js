@@ -1,5 +1,4 @@
 import { TodoSchema } from "../models/todoModel.js";
-import { UserSchema } from "../models/userModel.js";
 
 export const createTodo = async (req, res) => {
     try {
